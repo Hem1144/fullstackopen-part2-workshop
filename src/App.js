@@ -1,10 +1,10 @@
+import Refactor from "./components/Refactor";
+
 function App({ notes }) {
   return (
     <>
       <h1>My Note</h1>
-      <ul>
-        <li>{notes.content}</li>
-     </ul>
+      <Refactor notes={notes} />
     </>
   );
 }
