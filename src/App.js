@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Note from "./components/Note";
+import axios from "axios";
 
-const App = (props) => {
-  const [notes, setNotes] = useState(props.notes);
+const App = () => {
+  const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
+
+  useEffect(() => {
+    console.log("Do Coder");
+    let tryAxios = axios.get("http://localhost:3001/persons");
+    tryAxios.then((res) => {
+      console.dir(res.data);
+      setNotes(res.data);
+      console.log("Returning Promise");
+    });
+    console.log(tryAxios);
+  }, []);
 
   const notesToShow = notes.filter((note) => (showAll ? true : note.important));
 
@@ -17,7 +29,7 @@ const App = (props) => {
         important: Math.random() > 0.5,
       })
     );
-    setNewNote("");
+    setNewNote(" ");
     console.log("form has been submitted");
   };
 
